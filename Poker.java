@@ -100,6 +100,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		K.escribir("-----------------------------------------------------\n");
 		K.escribir("Voy a pedirle los cinco naipes de una mano de póker para codificar esa jugada.\n");
 		for (int n = 1; n <= numNaipes; n++) {
+			K.escribir("Naipe " + n + ":\n");
 			respuesta = K.preguntarChar("¿Cuál es el valor del naipe " + n + "? Indique número o primera letra: As, 2, 3, 4, 5, 6, 7, 8, 9, Diez, J, Q, K", "a23456789djqk");
 			switch (respuesta) {
 				case 'a':
@@ -121,7 +122,6 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 					valor = ""+respuesta;
 					break;
 			}
-			K.escribir("Naipe " + n + ":\n");
 			respuesta = K.preguntarChar("¿Cuál es el palo del naipe " + n + "? Indique primera letra: Corazones, Diamantes, Tréboles, Picas", "cdtp");
 			switch (respuesta) {
 				case 'c':
