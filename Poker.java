@@ -93,13 +93,13 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 	}
 
 	public void pedirNaipes() { // pide los datos por consola de los naipes de la jugada
+		naipes="";
 		char respuesta;
 		String palo;
 		String valor;
 		K.escribir("-----------------------------------------------------\n");
 		K.escribir("Voy a pedirle los cinco naipes de una mano de póker para codificar esa jugada.\n");
-		naipes="7q2t3t4t5t";
-/*		for (int n = 1; n <= numNaipes; n++) {
+		for (int n = 1; n <= numNaipes; n++) {
 			respuesta = K.preguntarChar("¿Cuál es el valor del naipe " + n + "? Indique número o primera letra: As, 2, 3, 4, 5, 6, 7, 8, 9, Diez, J, Q, K", "a23456789djqk");
 			switch (respuesta) {
 				case 'a':
@@ -136,7 +136,6 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 			}
 			naipes +=valor +palo;
 		}
-*/
 		K.escribir("------------------------------------------\n");
 		K.escribir("Los naipes introducidos son:\n");
 		for (int n = 0; n < numNaipes; n++)
@@ -195,6 +194,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		if (codigo.compareTo(codigoA) < 0)
 			codigo=new String(codigoA);
 		informarResultado();
+		K.preguntar("\nPulsar INTRO para salir");
 		return;
 	}
 
