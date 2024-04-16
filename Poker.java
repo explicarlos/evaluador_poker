@@ -1,27 +1,28 @@
 import java.util.ArrayList;
 
 public final class Poker { // naipes, código, métodos de una mano jugada
-	public final int numNaipes = 5; // naipes de una mano
-	public String naipes; // dq4r4p1tcr"; // string de 10 caracteres; contiene la descripción de cada naipe en 2 caracteres: valor y palo
+	private final int numNaipes = 5; // naipes de una mano
+	private String naipes; // dq4r4p1tcr"; // string de 10 caracteres; contiene la descripción de cada naipe en 2 caracteres: valor y palo
 	// ejemplo: "dq4r4p1tdr" significa: 'K' de corazones, '4' de diamantes (rombos), '4' de picas, 'AS' de tréboles, 'K' de diamantes (rombos)
 	// su código final de valor será: "3dd44e" significando: doble pareja de 'K' y '4' con 'AS'
-	public String codigo; // código alfanumérico de 6 caracteres, contiene el valor de la jugada
-	String codigoA; // registro de código cuando as vale máximo
-	public String tipoJugada="1"; // contiene el tipo de jugada (carta alta, pareja, doble pareja, trío...)
-	public ArrayList<String> naipesPalos = new ArrayList<String>();
-	public ArrayList<String> naipesValores = new ArrayList<String>();
-	public final String palosPosibles = "qrtp";
-	public final String valoresPosibles = "123456789abcde";
-	public final String[] palosNombres = {"corazones", "diamantes", "tréboles", "picas"};
-	public final String[] naipesNombres = {"as", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "sota", "dama", "rey", "as"};
-	public final String[] jugadasNombres = {"escalera real", "carta alta", "pareja", "doble pareja", "trío", "escalera", "color", "full", "póker", "escalera de color"};
-	public int indiceNombreJugada;
+	private String codigo; // código alfanumérico de 6 caracteres, contiene el valor de la jugada
+	private String codigoA; // registro de código cuando as vale máximo
+	private String tipoJugada="1"; // contiene el tipo de jugada (carta alta, pareja, doble pareja, trío...)
+	private ArrayList<String> naipesPalos = new ArrayList<String>();
+	private ArrayList<String> naipesValores = new ArrayList<String>();
+	private final String palosPosibles = "qrtp";
+	private final String valoresPosibles = "123456789abcde";
+	private final String[] palosNombres = {"corazones", "diamantes", "tréboles", "picas"};
+	private final String[] naipesNombres = {"as", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "sota", "dama", "rey", "as"};
+	private final String[] jugadasNombres = {"escalera real", "carta alta", "pareja", "doble pareja", "trío", "escalera", "color", "full", "póker", "escalera de color"};
+	private int indiceNombreJugada; // índice en los nombres de jugadas
+	private int indiceNombreJugadaA; // registro de índice cuando as vale máximo
 
 	public Poker() {
 		return;
 	}
 
-	public boolean validar() {
+	private boolean validar() {
 		if (naipes.length() != 2 * numNaipes)
 			return false;
 		for (int n = 0; n < numNaipes; n++)
@@ -30,17 +31,17 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return true;
 	}
 
-	public void asValorMax() {
+	private void asValorMax() {
 		naipes=naipes.replace("1", "e");
 		return;
 	}
 
-	public void asValorMin() {
+	private void asValorMin() {
 		naipes=naipes.replace("e", "1");
 		return;
 	}
 
-	public void organizar() {
+	private void organizar() {
 		vectorizarNaipes();
 		ordenarVectores();
 		generarNaipes();
@@ -48,7 +49,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return;
 	}
 
-	public void vectorizarNaipes() {
+	private void vectorizarNaipes() {
 		naipesValores.clear();
 		naipesPalos.clear();
 		for (int n = 0; n < numNaipes; n++) {
@@ -58,7 +59,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return;
 	}
 
-	public void ordenarVectores() {
+	private void ordenarVectores() {
 		for (int i = 0; i < numNaipes - 1; i++)
 			for (int j = i + 1; j < numNaipes; j++)
 				if (naipesValores.get(i).charAt(0)<naipesValores.get(j).charAt(0))
@@ -66,7 +67,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return;
 	}
 
-	public void intercambiarNaipes(int i, int j) {
+	private void intercambiarNaipes(int i, int j) {
 		String auxValor =naipesValores.get(i);
 		String auxPalo =naipesPalos.get(i);
 		naipesValores.set(i, naipesValores.get(j));
@@ -76,7 +77,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return;
 	}
 
-	public void generarNaipes() {
+	private void generarNaipes() {
 		naipes = "";
 		for (int n = 0; n < numNaipes; n++) {
 			naipes +=naipesValores.get(n) +naipesPalos.get(n);
@@ -84,15 +85,15 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		return;
 	}
 
-	public void generarCodigo() {
-		codigo = "" +tipoJugada;
+	private void generarCodigo() {
+		codigo =tipoJugada;
 		for (int n=0; n<numNaipes; n++) {
 			codigo +=naipesValores.get(n);
 		}
 		return;
 	}
 
-	public void pedirNaipes() { // pide los datos por consola de los naipes de la jugada
+	private void pedirNaipes() { // pide los datos por consola de los naipes de la jugada
 		naipes="";
 		char respuesta;
 		String palo;
@@ -142,7 +143,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 			K.escribir(nombrarNaipe(naipes.substring(2 * n, 2 * n + 2)) + "\n");
 		return;
 	}
-	public void informarResultado() { // informa el resultado del análisis por consola
+	private void informarResultado() { // informa el resultado del análisis por consola
 		long puntos=puntuarCodigo();
 		K.escribir("------------------------------------------\n");
 		K.escribir("Jugada: " +jugadasNombres[indiceNombreJugada]+"\n");
@@ -153,19 +154,19 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		K.escribir("------------------------------------------\n");
 		return;
 	}
-	public String nombrarNaipe(String naipe) {
+	private String nombrarNaipe(String naipe) {
 		return nombrarNaipeValor(naipe) + " de " + nombrarNaipePalo(naipe);
 	}
 
-	public String nombrarNaipeValor(String naipe) {
+	private String nombrarNaipeValor(String naipe) {
 		return naipesNombres[valoresPosibles.indexOf(naipe.charAt(0))];
 	}
 
-	public String nombrarNaipePalo(String naipe) {
+	private String nombrarNaipePalo(String naipe) {
 
 		return palosNombres[palosPosibles.indexOf(naipe.charAt(1))];
 	}
-	public long puntuarCodigo() {
+	private long puntuarCodigo() {
 		return Long.parseLong(codigo, 16)-1528881L;
 	}
 	public static void main(String[] args) {
@@ -187,39 +188,42 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		asValorMax();
 		organizar();
 		analizarJugada();
-		codigoA = new String(codigo);
+		codigoA=codigo;
+		indiceNombreJugadaA=indiceNombreJugada;
 		asValorMin();
 		organizar();
 		analizarJugada();
-		if (codigo.compareTo(codigoA) < 0)
-			codigo=new String(codigoA);
+		if (codigo.compareTo(codigoA)<0) {
+			codigo = codigoA;
+			indiceNombreJugada = indiceNombreJugadaA;
+		}
 		informarResultado();
 		K.preguntar("\nPulsar INTRO para salir");
 		return;
 	}
 
-	public void analizarJugada() {
+	private void analizarJugada() {
 		boolean res;
 		res=detectarEscaleraReal() || detectarEscaleraColor() || detectarPoker() || detectarFull() || detectarColor()
 			|| detectarEscalera() || detectarTrio() || detectarDoblePareja() || detectarPareja() || detectarCartaAlta();
 		return;
 	}
 
-	public boolean mismoPalo() {
+	private boolean mismoPalo() {
 		for (String car : naipesPalos)
 			if (!car.equals(naipesPalos.getFirst()))
 				return false;
 		return true;
 	}
 
-	public boolean enSecuencia() {
+	private boolean enSecuencia() {
 		for (int n = 0; n < numNaipes-1; n++)
 			if (Integer.parseInt(naipesValores.get(n), 16)!= Integer.parseInt(naipesValores.get(n+1), 16)+1)
 				return false;
 		return true;
 	}
 
-	public boolean detectarEscaleraReal() {
+	private boolean detectarEscaleraReal() {
 		if (mismoPalo() && enSecuencia() && naipesValores.getFirst().equals("e")) {
 			indiceNombreJugada = 0;
 			tipoJugada = "9";
@@ -229,8 +233,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		} else
 			return false;
 	}
-
-	public boolean detectarEscaleraColor() {
+	private boolean detectarEscaleraColor() {
 		if (mismoPalo() && enSecuencia()) {
 			indiceNombreJugada = 9;
 			tipoJugada = "9";
@@ -240,7 +243,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		} else
 			return false;
 	}
-	public boolean detectarPoker() {
+	private boolean detectarPoker() {
 		boolean esPoker;
 		if (
 			naipesValores.getFirst().charAt(0) == naipesValores.get(1).charAt(0)
@@ -265,7 +268,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		}
 		return esPoker;
 	}
-	public boolean detectarFull() {
+	private boolean detectarFull() {
 		boolean esFull;
 		if (
 			naipesValores.getFirst().charAt(0)==naipesValores.get(1).charAt(0)
@@ -291,7 +294,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		}
 		return esFull;
 	}
-	public boolean detectarColor() {
+	private boolean detectarColor() {
 		if (mismoPalo()) {
 			indiceNombreJugada = 6;
 			tipoJugada = "6";
@@ -301,7 +304,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		} else
 			return false;
 	}
-	public boolean detectarEscalera() {
+	private boolean detectarEscalera() {
 		if (enSecuencia()) {
 			indiceNombreJugada = 5;
 			tipoJugada = "5";
@@ -311,7 +314,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		} else
 			return false;
 	}
-	public boolean detectarTrio() {
+	private boolean detectarTrio() {
 		boolean esTrio;
 		if (
 			naipesValores.getFirst().charAt(0)==naipesValores.get(1).charAt(0)
@@ -344,7 +347,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		}
 		return esTrio;
 	}
-	public boolean detectarDoblePareja() {
+	private boolean detectarDoblePareja() {
 		boolean esDoblePareja;
 		if (
 			naipesValores.get(0).charAt(0)==naipesValores.get(1).charAt(0)
@@ -374,7 +377,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		}
 		return esDoblePareja;
 	}
-	public boolean detectarPareja() {
+	private boolean detectarPareja() {
 		boolean esPareja;
 		if (naipesValores.get(0).charAt(0)==naipesValores.get(1).charAt(0)) {
 			esPareja = true;
@@ -399,7 +402,7 @@ public final class Poker { // naipes, código, métodos de una mano jugada
 		}
 		return esPareja;
 	}
-	public boolean detectarCartaAlta() {
+	private boolean detectarCartaAlta() {
 		indiceNombreJugada = 1;
 		tipoJugada = "1";
 		generarNaipes();
